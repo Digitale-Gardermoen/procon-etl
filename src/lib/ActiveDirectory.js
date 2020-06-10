@@ -1,4 +1,4 @@
-const ActiveDirectory = require('activedirectory2').promisewrapper;
+const ActiveDirectory = require('activedirectory2').promiseWrapper;
 const config = require('../config/Configuration');
 
 const ldapConfig = {
