@@ -6,8 +6,9 @@ const Cron = require('../lib/Cron');
 const cron = new Cron();
 //cron.run(() => { console.log('it works.') });
 const ad = new AD();
-console.log(ad.getUsers());
-
+(async function() {
+  console.log(await ad.getUsers());
+});
 
 process.on('SIGINT', async function () {
   try {

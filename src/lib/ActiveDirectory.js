@@ -21,8 +21,8 @@ class LdapLoader {
     this.ad = new ActiveDirectory(ldapConfig);  // connect to AD with the current config.
   }
 
-  async getUsers() {
-    let result = await this.ad.findUsers(qryOpts, false);
+  getUsers() {
+    let result = this.ad.findUsers(qryOpts, false);
     if (!result || result.length == 0) throw new Error('No users found.');
     return result;
   }
