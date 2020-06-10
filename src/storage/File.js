@@ -1,13 +1,22 @@
 'use strict';
-const { createReadStream, createWriteStream } = require('fs');
+const {
+  createReadStream,
+  createWriteStream,
+  truncate,
+  exists
+} = require('fs');
 
 class File {
-  readBinaryStream(path) {
-    return createReadStream(path);
+  constructor(path) {
+    this.path = path;
   }
 
-  writeStream(path) {
-    return createWriteStream(path);
+  readBinaryStream() {
+    return createReadStream(this.path);
+  }
+
+  writeStream() {
+    return createWriteStream(this.path);
   }
 }
 

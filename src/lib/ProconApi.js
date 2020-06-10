@@ -1,10 +1,10 @@
 'use strict';
 const Request = require('../api/Request');
-const RequestForm = require('./models/RequestForm');
-const config = require('./config/Configuration');
+const RequestForm = require('../models/RequestForm');
+const config = require('../config/Configuration');
 
 class ProconApi {
-  async upload() {
+  upload() {
     const form = new RequestForm().build()
 
     this.options = {};
@@ -12,7 +12,8 @@ class ProconApi {
     this.options.method = 'POST';
     
     let request = new Request(config.proconRoute, this.options);
-    const result = await request.send(form);
+    const result = request.send(form);
+    return result;
   }
 }
 
