@@ -57,12 +57,7 @@ class RequestFactory {
     if (!config.apiUrl)                throw new Error('config.apiUrl is undefined, there is nowhere to send this request');
     if (this.method != 'POST')         throw new Error('You cannot POST a non-post request, check method and try again');
 
-    let query = '';
-    this.parameters.forEach((key) => {
-      query += '/' + key;
-    });
-
-    const url = `${config.apiUrl}/${this.route}${query}`
+    const url = `${config.apiUrl}/${this.route}`
     const urlObj = new URL(url);
 
     let requestOpt = {};

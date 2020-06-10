@@ -12,7 +12,7 @@ const ldapConfig = {
 };
 
 let qryOpts = {
-  filter: 'objectClass=user',
+  filter: config.ldapQueryFilter,
   baseDN: config.ldapQueryBaseDN
 };
 

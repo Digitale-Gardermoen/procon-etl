@@ -41,29 +41,23 @@ class Request {
    */
   send(formData) {
     return new Promise((resolve, reject) => {
-      const lib = this.options.urlObj.protocol == 'https:'
+      const lib = this.builtRequest.urlObj.protocol == 'https:'
         ? require('https')
         : require('http');
       
-      this.options.headers = formData.getHeaders();
+      this.builtRequest.requestOpt.headers = formData.getHeaders();
 
-      const request = lib.request(this.options.urlObj, this.options.requestOpt, (response) => {
+      let request = lib.req
 
-        if (response.statusCode < 200 || response.statusCode > 299) {
-          reject(new Error('Failed to load page, status code: ' + response.statusCode));
-        }
+      request = lib.request(this.builtRequest.urlObj, this.builtRequest.requestOpt);
+      formData.pipe(request);
 
-        const returnBody = [];
-
+      request.on('response', (response) => {
+        let returnBody = [];
         response.on('data', (chunk) => returnBody.push(chunk));
         response.on('end', () => resolve(JSON.parse(returnBody.join(''))));
       });
-
       request.on('error', (err) => reject(new Error(err)));
-
-      formData.pipe(request);
-
-      request.end();
     });
   }
 }

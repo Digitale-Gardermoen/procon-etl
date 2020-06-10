@@ -17,17 +17,18 @@ class Csv {
       if (!this.fileStream.writable) rej('File stream unwriteable, stopping.');
       
       // Set headers
-      this.fileStream.write(config.csvHeaders + '\n');
+      this.fileStream.write(config.csvHeaders + '\r\n');
   
       users.forEach((user) => {
         let countryCode = '47';
         let mobile = user.mobile;
-        if (user.mobile.startsWith('+')) {
-          countryCode = mobile.subString(1, 2);
-          mobile = mobile.subString(3);
+        if (!mobile) mobile = '';
+        else if (mobile.startsWith('+')) {
+          countryCode = mobile.substring(1, 2);
+          mobile = mobile.substring(3);
         }
   
-        this.fileStream.write(`${user.givenName},${user.sn},${countryCode},${mobile},${user.mail},,,\n`);
+        this.fileStream.write(`${user.givenName},${user.sn},${countryCode},${mobile},${user.mail},,,\r\n`);
       });
   
       this.fileStream.end();

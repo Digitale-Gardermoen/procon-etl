@@ -1,9 +1,7 @@
 'use strict';
 const {
   createReadStream,
-  createWriteStream,
-  truncate,
-  exists
+  createWriteStream
 } = require('fs');
 
 class File {

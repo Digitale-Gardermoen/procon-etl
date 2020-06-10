@@ -5,11 +5,6 @@ class Configuration {
   constructor() {
     this.config = {};
 
-    this.config.mongooseUri = process.env.MONGOOSE_MONGOURI || 'mongodb://localhost:27017';
-    this.config.mongooseDbname = process.env.MONGOOSE_DBNAME || 'Default';
-    this.config.mongooseUsername = process.env.MONGOOSE_USERNAME || 'user';
-    this.config.mongoosePassword = process.env.MONGOOSE_PASSWORD || 'pass';
-
     this.config.companyId = process.env.COMAPNYID;
     this.config.languageId = process.env.LANGUAGEID;
     this.config.siteId = process.env.LANGUAGEID;
@@ -27,6 +22,7 @@ class Configuration {
     this.config.ldapUsername = process.env.LDAP_USERNAME,
     this.config.ldapPassword = process.env.LDAP_PASSWORD,
     this.config.ldapQueryBaseDN = process.env.LDAP_QUERY_OPTS_BASEDN;
+    this.config.ldapQueryFilter = process.env.LDAP_QUERY_FILTER;
     this.config.adUserProperties = process.env.ADUSERPROPERTIES;
   }
 }

@@ -13,9 +13,17 @@ class Scheduler {
     const csv = new Csv();
     await csv.populate(userList);
 
-    //const procon = new ProconApi();
-    //let res = await procon.upload();
-    //console.log(getDateString(), '- Sent request, got response:', res);
+    const procon = new ProconApi();
+    try {
+      let res = await procon.upload();
+      console.log(getDateString(), '- Sent request, got response:', res);
+    }
+    catch (err) {
+      console.error(err);
+    }
+    finally {
+      console.log(getDateString(), '-Task end');
+    }
   }
 }
 

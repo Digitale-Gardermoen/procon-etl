@@ -8,8 +8,9 @@ console.log(getDateString(), '- Running procon-etl');
 const cron = new Cron();
 const scheduler = new Scheduler();
 
-console.log(getDateString(), '- running cron job');
-cron.run(scheduler.run);
+console.log(getDateString(), '- Running cron job');
+//cron.run(scheduler.run);
+scheduler.run();
 
 process.on('SIGINT', async function () {
   try {
