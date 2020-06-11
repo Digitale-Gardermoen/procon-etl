@@ -16,11 +16,23 @@ let qryOpts = {
   baseDN: config.ldapQueryBaseDN
 };
 
+/**
+ * Connect to AD via LDAP, Get filtered users.
+ * @class
+ */
 class LdapLoader {
+  /**
+   * Connects to LDAP with the specified config.
+   * @constructor
+   */
   constructor() {
     this.ad = new ActiveDirectory(ldapConfig);  // connect to AD with the current config.
   }
 
+  /**
+   * Get a filtered list of users from AD, query uses LDAP filtering.
+   * @returns {Array<Object>} Array represents a list of user objects
+   */
   getUsers() {
     let result = this.ad.findUsers(qryOpts, false);
     if (!result || result.length == 0) throw new Error('No users found.');

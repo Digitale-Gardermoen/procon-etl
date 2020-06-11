@@ -4,7 +4,15 @@ const AD = require('../lib/ActiveDirectory');
 const Csv = require('../lib/Csv');
 const ProconApi = require('../lib/ProconApi');
 
+/**
+ * Class is built to run as a task, the task is to:
+ * Get AD users, populate a csv file and send the csv file to an API.
+ * @class Scheduler
+ */
 class Scheduler {
+  /**
+   * Run the task, this should be called by the cron job.
+   */
   async run() {
     console.log(getDateString(), '- Task start');
     const ad = new AD();

@@ -2,12 +2,25 @@
 const config = require('../config/Configuration');
 const File = require('../storage/File');
 
+/**
+ * Handles the creation of a CSV file.
+ */
 class Csv {
+  /**
+   * Creates the file and writeable stream.
+   * @constructor
+   * @param {string} [filePath] - Optional filepath, currently not in use.
+   */
   constructor(filePath) {
     this.filePath = !filePath ? config.csvFilePath : filePath;
     this.fileStream = new File(this.filePath).writeStream();
   }
 
+  /**
+   * Populate the CSV file with the received user data.
+   * @param {Array<Object>} users - A list of user objects
+   * @returns {Promise<Object>} Promise represents an empty object(resolve) or an error(reject).
+   */
   populate(users) {
     return new Promise((res, rej) => {
       this.fileStream.on('finish', () => {
@@ -16,9 +29,11 @@ class Csv {
 
       if (!this.fileStream.writable) rej('File stream unwriteable, stopping.');
       
-      // Set headers
+      // Set headers, all headers must be correct and provided in the csv file.
       this.fileStream.write(config.csvHeaders + '\r\n');
   
+      // Configure the user object, as we need to set the countrycode
+      // and remove the country code from the mobile number.
       users.forEach((user) => {
         let countryCode = '47';
         let mobile = user.mobile;
@@ -27,7 +42,10 @@ class Csv {
           countryCode = mobile.substring(1, 2);
           mobile = mobile.substring(3);
         }
-  
+        
+        // Hardcoded write, could not be bothered to create a dynamic result set.
+        // WARN: might have to cork the stream if this will start having performance issues.
+        // This is not tested with thousands of users.
         this.fileStream.write(`${user.givenName},${user.sn},${countryCode},${mobile},${user.mail},,,\r\n`);
       });
   

@@ -1,0 +1,13 @@
+{
+  "plugins": [
+    "plugins/markdown"
+  ],
+  "source": {
+    "include": [
+      "src/"
+    ]
+  },
+  "opts": {
+    "template": "node_modules/tui-jsdoc-template"
+  }
+}
