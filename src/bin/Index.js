@@ -9,8 +9,7 @@ const cron = new Cron();
 const scheduler = new Scheduler();
 
 console.log(getDateString(), '- Running cron job');
-//cron.run(scheduler.run);
-scheduler.run();
+cron.run(scheduler.run);
 
 process.on('SIGINT', async function () {
   try {
