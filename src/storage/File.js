@@ -1,8 +1,5 @@
 'use strict';
-const {
-  createReadStream,
-  createWriteStream
-} = require('fs');
+const { createReadStream, createWriteStream } = require('fs');
 
 /**
  * File handling, write and read streams
