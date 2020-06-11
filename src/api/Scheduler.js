@@ -15,22 +15,22 @@ class Scheduler {
    */
   async run() {
     console.log(getDateString(), '- Task start');
-    const ad = new AD();
-    const userList = await ad.getUsers();
-
-    const csv = new Csv();
-    await csv.populate(userList);
-
-    const procon = new ProconApi();
     try {
+      const ad = new AD();
+      const userList = await ad.getUsers();
+
+      const csv = new Csv();
+      await csv.populate(userList);
+
+      const procon = new ProconApi();
       let res = await procon.upload();
       console.log(getDateString(), '- Sent request, got response:', res);
     }
     catch (err) {
-      console.error(err);
+      console.error(getDateString(), err);
     }
     finally {
-      console.log(getDateString(), '-Task end');
+      console.log(getDateString(), '-Task end'); 
     }
   }
 }
