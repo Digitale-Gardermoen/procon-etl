@@ -23,11 +23,9 @@ class Csv {
    */
   populate(users) {
     return new Promise((res, rej) => {
-      this.fileStream.on('finish', () => {
-        res();
-      });
-
-      if (!this.fileStream.writable) rej('File stream unwriteable, stopping.');
+      this.fileStream.on('finish', () => res()); // this is called when the stream ends.
+      this.fileStream.on('error', () => rej(new Error('There was an error writing to the stream.')));
+      if (!this.fileStream.writable) rej(new Error('File stream unwriteable, stopping.'));
       
       // Set headers, all headers must be correct and provided in the csv file.
       this.fileStream.write(config.csvHeaders + '\r\n');
