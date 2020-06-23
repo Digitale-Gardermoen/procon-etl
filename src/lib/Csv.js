@@ -37,7 +37,7 @@ class Csv {
         let mobile = user.mobile;
         if (!mobile) mobile = '';
         else if (mobile.startsWith('+')) {
-          countryCode = mobile.substring(1, 2);
+          countryCode = mobile.substring(1, 3);
           mobile = mobile.substring(3);
         }
         
