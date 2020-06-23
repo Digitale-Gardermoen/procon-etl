@@ -33,6 +33,8 @@ class Csv {
       // Configure the user object, as we need to set the countrycode
       // and remove the country code from the mobile number.
       users.forEach((user) => {
+        if (!user.mail) return;
+
         let countryCode = '47';
         let mobile = user.mobile;
         if (!mobile) mobile = '';
@@ -40,13 +42,16 @@ class Csv {
           countryCode = mobile.substring(1, 3);
           mobile = mobile.substring(3);
         }
+
+        let department = user.department;
+        if (department.includes(',')) department.replace(',', '');
         
         // Hardcoded write, could not be bothered to create a dynamic result set.
         // WARN: might have to cork the stream if this will start having performance issues.
         // This is not tested with thousands of users.
-        this.fileStream.write(`${user.givenName},${user.sn},${countryCode},${mobile},${user.mail},,,\r\n`);
+        this.fileStream.write(`${user.givenName},${user.sn},${countryCode},${mobile},${user.mail},,${department},\r\n`);
       });
-  
+
       this.fileStream.end();
     });
   }
