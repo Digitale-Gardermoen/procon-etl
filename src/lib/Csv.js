@@ -43,8 +43,7 @@ class Csv {
           mobile = mobile.substring(3);
         }
 
-        let department = user.department;
-        if (department.includes(',')) department.replace(',', '');
+        let department = user.department.replace(',', '');
         
         // Hardcoded write, could not be bothered to create a dynamic result set.
         // WARN: might have to cork the stream if this will start having performance issues.
