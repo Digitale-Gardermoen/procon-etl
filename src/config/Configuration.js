@@ -5,9 +5,9 @@ class Configuration {
   constructor() {
     this.config = {};
 
-    this.config.companyId = process.env.COMAPNYID;
+    this.config.companyId = process.env.COMPANYID;
     this.config.languageId = process.env.LANGUAGEID;
-    this.config.siteId = process.env.LANGUAGEID;
+    this.config.siteId = process.env.SITEID;
     this.config.csvFilePath = process.env.CSVFILEPATH;
     this.config.csvHeaders = process.env.CSVHEADERS;
 
@@ -26,4 +26,5 @@ class Configuration {
     this.config.adUserProperties = process.env.ADUSERPROPERTIES;
   }
 }
+
 module.exports = new Configuration().config;
