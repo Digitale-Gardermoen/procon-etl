@@ -30,7 +30,7 @@ class Scheduler {
       console.error(getDateString(), err);
     }
     finally {
-      console.log(getDateString(), '-Task end'); 
+      console.log(getDateString(), '- Task end'); 
     }
   }
 }
